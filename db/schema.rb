@@ -32,12 +32,12 @@ ActiveRecord::Schema.define(version: 20161006181137) do
   end
 
   create_table "tracks", force: :cascade do |t|
-    t.string   "name",                      null: false
-    t.integer  "album_id",                  null: false
-    t.boolean  "bonus",      default: true, null: false
-    t.text     "lyrics",                    null: false
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "name",                       null: false
+    t.integer  "album_id",                   null: false
+    t.boolean  "bonus",      default: false, null: false
+    t.text     "lyrics",                     null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["album_id"], name: "index_tracks_on_album_id", using: :btree
   end
 

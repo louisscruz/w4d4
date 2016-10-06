@@ -1,0 +1,7 @@
+<h2><%= @track.name %></h2>
+
+<%= button_to "Edit", band_url(@track), method: "patch" %>
+<%= button_to "Delete", band_url(@track), method: "delete" %>
+<%= button_to "Album", album_url(@track.album), method: "get" %>
+
+<p><%= @track.lyrics %></p>
