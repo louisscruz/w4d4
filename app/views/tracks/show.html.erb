@@ -1,7 +1,9 @@
 <h2><%= @track.name %></h2>
-<p>From <%= @track.album.name %> by <%= @track.band.name %></p>
+<% if @track.bonus %><small>bonus</small><% end %>
+<p>From <%= link_to @track.album.name, album_url(@track.album) %> by <%= @track.band.name %></p>
 
-<%= button_to "Edit", band_url(@track), method: "patch" %>
+
+<%= button_to "Edit", edit_track_url(@track), method: "get" %>
 <%= button_to "Delete", band_url(@track), method: "delete" %>
 
 <p><%= @track.lyrics %></p>

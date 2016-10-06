@@ -1,0 +1,22 @@
+<% action = track.persisted? ? track_url(track) : album_tracks_url %>
+<% method = track.persisted? ? :patch : :put %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <% if track.persisted? %>
+    <input type="hidden" name="_method" value="<%= method %>">
+  <% end %>
+  <section>
+    <label for="name">Name</label>
+    <input type="text" name="track[name]" id="name" value="<%= track.name %>">
+  </section>
+  <section>
+    <label for="bonus">Bonus</label>
+    <input type="checkbox" name="track[bonus]" id="bonus" <%= "checked" if track.bonus %>>
+  </section>
+  <section>
+    <label for="lyrics">Lyrics</label>
+    <textarea id="lyrics" name="track[lyrics]"><%= track.lyrics %></textarea>
+  </section>
+  <button>Submit</button>
+</form>
