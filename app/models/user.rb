@@ -4,6 +4,14 @@ class User < ApplicationRecord
   validates :email, :session_token, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
+  has_many :notes,
+    primary_key: :id,
+    foreign_key: :user_id,
+    class_name: :Note
+  has_many :noted_tracks,
+    through: :notes,
+    source: :track
+
   attr_reader :password
 
   def self.generate_session_token

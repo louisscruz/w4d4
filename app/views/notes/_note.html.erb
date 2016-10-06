@@ -1,0 +1,5 @@
+<div class="comment">
+  <p><%= note.body %></p>
+  <small><%= note.user.email %></small>
+  <%= button_to "Delete", note_url(note), method: "delete" %>
+</div>

@@ -1,1 +1,6 @@
 <h2><%= @user.email %><h2>
+
+<h3>Noted Tracks</h3>
+<% @user.noted_tracks.each do |track| %>
+  <li><%= link_to track.name, track_url(track) %></li>
+<% end %>

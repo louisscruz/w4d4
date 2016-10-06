@@ -35,7 +35,7 @@ class TracksController < ApplicationController
   private
 
   def set_track
-    @track = Track.find(params[:id])
+    @track = Track.includes(:notes).find(params[:id])
   end
 
   def track_params

@@ -5,14 +5,20 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+louis = User.create!(email: "Louisstephancruz@me.com", password: "testtest")
+other = User.create!(email: "lsc@juilliard.edu", password: "testtest")
+
 puts "generating bands"
+
 100.times do
   name = "#{Faker::Hacker.adjective} #{Faker::Space.galaxy} #{Faker::Hacker.noun}".titleize
   Band.create!(name: name)
 end
+
 puts "generated #{Band.all.length} bands"
 
 puts "generating albums and tracks"
+
 400.times do |i|
   band = Random.new.rand(0..Band.all.length)
   name = "#{Faker::Pokemon.location} #{Faker::StarWars.specie}"
@@ -22,9 +28,24 @@ puts "generating albums and tracks"
   Random.new.rand(5..16).times do
     name = "#{Faker::StarWars.planet} #{Faker::Superhero.power}"
     bonus = [true, false, false, false, false, false].sample
-    lyrics = Faker::Hipster.paragraph(3)
+    lyrics = []
+    Random.new.rand(1..20).times do
+      length = Random.new.rand(4..7)
+      lyrics << Faker::Hipster.sentence(length)
+    end
+    lyrics = lyrics.join("\n")
     Track.create!(album_id: i + 1, name: name, bonus: bonus, lyrics: lyrics)
+  end
+  4.times do
+    random_track = Track.offset(rand(Track.count)).first
+    note_body = Faker::Hacker.say_something_smart
+    Note.create!(body: note_body, user_id: louis.id, track_id: random_track.id)
+  end
+  4.times do
+    random_track = Track.offset(rand(Track.count)).first
+    note_body = Faker::Hacker.say_something_smart
+    Note.create!(body: note_body, user_id: other.id, track_id: random_track.id)
   end
 end
 
-puts "generated #{Album.all.length} albums and #{Track.all.length} tracks"
+puts "generated #{Album.count} albums, #{Track.count} tracks, and #{Note.count} notes"

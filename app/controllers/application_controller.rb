@@ -21,4 +21,14 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_url
     end
   end
+
+  def correct_user(&prc)
+    current_user.id == prc.call.user_id
+  end
+
+  def correct_user_only(&prc)
+    unless correct_user_only(&prc)
+      redirect_to :back
+    end
+  end
 end
