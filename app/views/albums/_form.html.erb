@@ -1,0 +1,23 @@
+<% action = album.persisted? ? album_url(album) : band_albums_url %>
+<% method = album.persisted? ? :patch : :put %>
+
+<form action="<%= action %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <% if album.persisted? %>
+    <input type="hidden" name="_method" value="<%= method %>">
+  <% end %>
+
+  <section>
+    <label for="name">Name</label>
+    <input type="text" name="album[name]" value="<%= album.name %>" id="name">
+  </section>
+  <section>
+    <label for="year">Year</label>
+    <input type="number" name="album[year]" value="<%= album.year ? album.year : 2000 %>" id="year">
+  </section>
+  <section>
+    <input type="checkbox" name="album[live]" <%= "checked" if album.live %> id="live">
+    <label for="live">Live</label>
+  </section>
+  <button>Submit</button>
+</form>

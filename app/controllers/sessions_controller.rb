@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
     )
     if user
       login(user)
-      p user
       redirect_to user_url(user)
     else
       render :new
