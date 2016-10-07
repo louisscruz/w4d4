@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Please activate your account.</h1>
+    <a href="http://localhost:3000/users/<%= @user.id %>/activate?activation_code=<%= @user.activation_code %>">Activate here</a>
+  </body>
+</html>

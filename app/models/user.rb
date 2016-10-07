@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   after_initialize :ensure_session_token
+  after_create :ensure_activation_code
   validates :email, :session_token, :password_digest, presence: true
   validates :email, :session_token, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
@@ -18,6 +19,13 @@ class User < ApplicationRecord
     begin
       token = SecureRandom::urlsafe_base64
     end while User.exists?(session_token: token)
+    token
+  end
+
+  def self.generate_activation_token
+    begin
+      token = SecureRandom::urlsafe_base64
+    end while User.exists?(activation_code: token)
     token
   end
 
@@ -44,5 +52,14 @@ class User < ApplicationRecord
   def is_password?(password)
     bc_object = BCrypt::Password.new(self.password_digest)
     bc_object.is_password?(password)
+  end
+
+  def ensure_activation_code
+    self.activation_code = self.class.generate_activation_token
+    self.save
+  end
+
+  def activate!
+    self.update_attributes(activated: true)
   end
 end
