@@ -1,5 +1,6 @@
 class BandsController < ApplicationController
-  before_action :logged_in_only, only: [:show, :edit, :new, :create, :update, :destroy]
+  before_action :logged_in_only, only: [:show]
+  before_action :admin_only, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_band, only: [:show, :edit, :update, :destroy]
 
   def index

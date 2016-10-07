@@ -4,6 +4,11 @@
 <%= link_to "Delete", band_url(@band), method: "delete" %>
 <%= button_to "Add Album +", new_band_album_url(@band), method: "get" %>
 
+<small>Tags:</small>
+<% @band.tags.each do |tag| %>
+  <small class="tag"><%= tag.body %></small>
+<% end %>
+
 <h2>Albums</h2>
 <ul>
   <% @band.albums.each do |album| %>

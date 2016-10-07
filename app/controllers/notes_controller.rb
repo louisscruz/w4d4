@@ -26,7 +26,7 @@ class NotesController < ApplicationController
   end
 
   def correct_user_only
-    unless @note.user_id == current_user.id
+    unless @note.user_id == current_user.id || is_admin?
       flash[:errors] = ["Unauthorized"]
       redirect_to :back
     end

@@ -1,7 +1,10 @@
 <h2><%= @album.name %></h2>
 <% if @album.live %><small>live</small><% end %>
 <p>by <%= link_to @album.band.name, band_url(@album.band) %></p>
-
+<small>Tags:</small>
+<% @album.tags.each do |tag| %>
+  <small class="tag"><%= tag.body %></small>
+<% end %>
 <%= button_to "Edit", edit_album_url(@album), method: "get" %>
 <%= button_to "Delete", album_url(@album), method: "delete" %>
 <%= button_to "Add Track +", new_album_track_url(@album.band), method: "get" %>

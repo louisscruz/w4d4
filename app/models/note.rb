@@ -8,4 +8,6 @@ class Note < ApplicationRecord
     primary_key: :id,
     foreign_key: :track_id,
     class_name: :Track
+  has_many :tags,
+    as: :taggable
 end

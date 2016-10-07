@@ -2,6 +2,11 @@
 <% if @track.bonus %><small>bonus</small><% end %>
 <p>From <%= link_to @track.album.name, album_url(@track.album) %> by <%= @track.band.name %></p>
 
+<small>Tags:</small>
+<% @track.tags.each do |tag| %>
+  <small class="tag"><%= tag.body %></small>
+<% end %>
+
 
 <%= button_to "Edit", edit_track_url(@track), method: "get" %>
 <%= button_to "Delete", band_url(@track), method: "delete" %>

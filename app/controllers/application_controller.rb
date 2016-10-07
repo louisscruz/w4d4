@@ -22,13 +22,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def correct_user(&prc)
-    current_user.id == prc.call.user_id
+  def is_admin?
+    current_user && current_user.admin
   end
 
-  def correct_user_only(&prc)
-    unless correct_user_only(&prc)
-      redirect_to :back
+  def admin_only
+    unless is_admin?
+      redirect_to root_url
     end
   end
 end

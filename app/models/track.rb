@@ -14,4 +14,6 @@ class Track < ApplicationRecord
   has_many :noters,
     through: :notes,
     source: :user
+  has_many :tags,
+    as: :taggable
 end

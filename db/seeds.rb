@@ -49,3 +49,14 @@ puts "generating albums and tracks"
 end
 
 puts "generated #{Album.count} albums, #{Track.count} tracks, and #{Note.count} notes"
+
+puts "generating tags"
+
+40.times do
+  word = Faker::Hipster.word
+  taggable_type = ["Band", "Track", "Album"].sample
+  id = taggable_type.constantize.all.sample.id
+  Tag.create!(body: word, taggable_type: taggable_type, taggable_id: id)
+end
+
+puts "generated #{Tag.count} tags and applied them to #{Tag.count} objects"

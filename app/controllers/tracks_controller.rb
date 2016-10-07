@@ -1,5 +1,6 @@
 class TracksController < ApplicationController
-  before_action :logged_in_only
+  before_action :logged_in_only, only: [:show]
+  before_action :admin_only, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_track, only: [:show, :edit, :update, :destroy]
 
   def show

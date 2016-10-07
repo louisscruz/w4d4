@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161007000240) do
+ActiveRecord::Schema.define(version: 20161007003800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 20161007000240) do
     t.index ["user_id"], name: "index_notes_on_user_id", using: :btree
   end
 
+  create_table "tags", force: :cascade do |t|
+    t.string   "body",          null: false
+    t.string   "taggable_type"
+    t.integer  "taggable_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["taggable_type", "taggable_id"], name: "index_tags_on_taggable_type_and_taggable_id", using: :btree
+  end
+
   create_table "tracks", force: :cascade do |t|
     t.string   "name",                       null: false
     t.integer  "album_id",                   null: false
@@ -59,6 +68,7 @@ ActiveRecord::Schema.define(version: 20161007000240) do
     t.datetime "updated_at",                      null: false
     t.boolean  "activated",       default: false, null: false
     t.string   "activation_code"
+    t.boolean  "admin",           default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree
   end
